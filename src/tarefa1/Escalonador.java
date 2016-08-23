@@ -9,6 +9,7 @@ public class Escalonador {
 	
 	private final int NUM_THREADS = 120;
 	private final int CONCURRENT_THREADS = 4;
+	private final int INTERVAL_MS = 1;
 	private ScheduledExecutorService escritoras;
 	private ExecutorService leitoras;
 	private Buffer buffer;
@@ -31,7 +32,7 @@ public class Escalonador {
         			Thread.currentThread().interrupt();
         		}
         	}
-        }, 0, 1, TimeUnit.MILLISECONDS);
+        }, 0, INTERVAL_MS, TimeUnit.MILLISECONDS);
         // instancia consumidores que competirao pelo processador
         for(int i = 0; i < NUM_THREADS; i++){
         	leitoras.execute(new Consumidor(buffer));
