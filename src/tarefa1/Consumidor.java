@@ -2,16 +2,15 @@ package tarefa1;
 
 public class Consumidor implements Runnable{
 	
-	private Buffer msg;
+	private Buffer buffer;
+	private int id;
 
 	public Consumidor(Buffer buffer) {
-		msg = buffer;
+		this.buffer = buffer;
 	}
 
     public void run() {
-        for (int i = 0; i < 120; i++) { 
-            while(msg.ler() != 0){}  
-        }
+        System.out.println("Thread leitora leu valor: " + buffer.ler());
     }
 
 }

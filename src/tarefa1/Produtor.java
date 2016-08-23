@@ -1,24 +1,19 @@
 package tarefa1;
 
 
-public class Produtor implements Runnable {
+public class Produtor extends Thread {
 
-	private Buffer msg;
-	private Escalonador escalonador;
-	private String id;
+	private Buffer buffer;
+	private int num;
 
-	public Produtor(Buffer buffer, Escalonador escalonador, String id) {
-		this.msg = buffer;
-		this.escalonador = escalonador;
-		this.id = id;
+	public Produtor(Buffer buffer, int num) {
+		this.buffer = buffer;
+		this.num = num;
 	}
 
-	public void run() {
-		while (!Thread.currentThread().isInterrupted()) {
-			System.out.println(Thread.currentThread().getId()  + " " + id);
-			Thread.currentThread().interrupt();
-		}
-
+	public void start() {
+		buffer.escrever(num);
+		System.out.println("Thread escritora " + num);
 	}
 
 }
