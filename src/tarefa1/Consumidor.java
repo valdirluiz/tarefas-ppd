@@ -5,12 +5,16 @@ public class Consumidor implements Runnable{
 	private Buffer buffer;
 	private int id;
 
-	public Consumidor(Buffer buffer) {
+	public Consumidor(Buffer buffer, int id) {
 		this.buffer = buffer;
+		this.id = id;
 	}
 
     public void run() {
-        System.out.println("Thread leitora leu valor: " + buffer.ler());
+    	synchronized(buffer) {
+        	System.out.println("Thread leitora " + id + " leu valor: " + buffer.ler());
+    		//buffer.ler();
+    	}
     }
 
 }

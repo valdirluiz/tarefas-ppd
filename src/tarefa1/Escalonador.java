@@ -35,7 +35,7 @@ public class Escalonador {
         }, 0, INTERVAL_MS, TimeUnit.MILLISECONDS);
         // instancia consumidores que competirao pelo processador
         for(int i = 0; i < NUM_THREADS; i++){
-        	leitoras.execute(new Consumidor(buffer));
+        	leitoras.execute(new Consumidor(buffer, i+1));
         }
 	}
 }

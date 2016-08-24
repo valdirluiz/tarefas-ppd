@@ -10,15 +10,16 @@ public class Buffer {
 	}
 
 	public synchronized int ler() {
-		if(num == 0){
+		while(num == 0){
 			try {
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		} else {
-			notifyAll();
 		}
-		return this.num;
+		int result = num;
+		num = 0;
+		notifyAll();
+		return result;
 	}
 }
