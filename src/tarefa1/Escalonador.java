@@ -9,7 +9,7 @@ public class Escalonador {
 	
 	private final int NUM_THREADS = 120;
 	private final int CONCURRENT_THREADS = 4;
-	private final int INTERVAL_MS = 1;
+	private final int INTERVAL_MS = 10;
 	private ScheduledExecutorService escritoras;
 	private ExecutorService leitoras;
 	private Buffer buffer;

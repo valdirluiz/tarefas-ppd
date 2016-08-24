@@ -13,7 +13,6 @@ public class Produtor extends Thread {
 
 	public void start() {
 		buffer.escrever(num);
-		System.out.println("Thread escritora " + num);
 	}
 
 }

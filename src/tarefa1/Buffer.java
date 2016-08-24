@@ -2,23 +2,53 @@ package tarefa1;
 
 public class Buffer {
 
-	private int num= 0;
+	private int valor = 0;
+	boolean ocupado = false;
 
-	public synchronized void escrever(int num) {
-		this.num = num;
+	public synchronized void escrever(int valor) {
+		while (ocupado) {
+
+			try {
+
+				wait();
+
+			} catch (InterruptedException ex) {
+
+				ex.printStackTrace();
+
+			}
+
+		}
+
+		ocupado = true;
+		
+		this.valor = valor;
+
+		System.out.println("Escreveu " + valor);
+		
 		notifyAll();
 	}
 
-	public synchronized int ler() {
-		if(num == 0){
+	public synchronized void ler() {
+		while (!ocupado) {
+
 			try {
+
 				wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+
+			} catch (InterruptedException ex) {
+
+				ex.printStackTrace();
+
 			}
-		} else {
-			notifyAll();
+
 		}
-		return this.num;
+
+		ocupado = false;
+
+		System.out.println("Leu: " + this.valor);
+
+		notifyAll();
+
 	}
 }
