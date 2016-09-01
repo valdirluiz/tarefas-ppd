@@ -1,0 +1,7 @@
+package tarefa3;
+
+public enum Estado {
+	
+	ESTACIONADA, TAXIANDO_CHEGADA, TAXIANDO_SAIDA, VOANDO, AGUARDANDO_DECOLAGEM;
+
+}
