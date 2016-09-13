@@ -1,11 +1,13 @@
 package tarefa3;
 
-public class Aeronave implements Runnable {
+public class Aeronave extends Thread {
 
 	private long codigo;
 	private Estado estado;
 	private boolean working = true;
 	private Torre torre;
+	
+	
 
 	public Aeronave(long codigo, Estado estado, Torre torre) {
 		this.codigo = codigo;
@@ -15,14 +17,30 @@ public class Aeronave implements Runnable {
 	
 	private void updatePriority(){
 		Thread.currentThread().setPriority(estado.prioridade);
+		
 	}
 	
+	
+	@Override
 	public void run(){
+		//System.out.println("Código: " + codigo + " . Estado: " + estado);
 		while(working){
 			updatePriority();
-			torre.getSemafaro().acquire();
+
+			try {
+				Thread.sleep(1000l);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				torre.getSemafaro().acquire();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			work();
 			torre.getSemafaro().release();
+			
 		}
 	}
 	
